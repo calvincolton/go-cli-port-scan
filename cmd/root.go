@@ -67,9 +67,6 @@ port-scan allows you to add, list, and delete hosts from the list.
 port-scan executes a port scan on specified TCP ports. You can customize the target ports using a command line flag.
 	`,
 	Version: "0.1",
-	// Uncomment the following line if your bare application
-	// has an action associated with it:
-	// Run: func(cmd *cobra.Command, args []string) { },
 }
 
 // Execute adds all child commands to the root command and sets flags appropriately.

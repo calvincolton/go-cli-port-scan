@@ -19,7 +19,7 @@ func setup(t *testing.T, hosts []string, initList bool) (string, func()) {
 	}
 	tf.Close()
 
-	// initialize list if needed
+	// Initialize list if needed
 	if initList {
 		hl := &scan.HostsList{}
 
@@ -32,7 +32,7 @@ func setup(t *testing.T, hosts []string, initList bool) (string, func()) {
 		}
 	}
 
-	// return the temp file name and cleanup
+	// Return the temp file name and cleanup
 	return tf.Name(), func() {
 		os.Remove(tf.Name())
 	}
@@ -81,12 +81,12 @@ func TestHostActions(t *testing.T) {
 
 			var out bytes.Buffer
 
-			// execute action and capture output
+			// Execute action and capture output
 			if err := tc.actionFunction(&out, tf, tc.args); err != nil {
 				t.Fatalf("Expected no error, got %q\n", err)
 			}
 
-			// test actions output
+			// Test actions output
 			if out.String() != tc.expectedOut {
 				t.Errorf("Expected output %q, got %q\n", tc.expectedOut, out.String())
 			}
@@ -112,7 +112,7 @@ func TestIntegration(t *testing.T) {
 
 	var out bytes.Buffer
 
-	// define expected output of all actions
+	// Define expected output of all actions
 	expectedOut := ""
 	for _, v := range hosts {
 		expectedOut += fmt.Sprintf("Added host: %s\n", v)
@@ -123,7 +123,7 @@ func TestIntegration(t *testing.T) {
 	expectedOut += strings.Join(hostsEnd, "\n")
 	expectedOut += fmt.Sprintln()
 
-	// execute operations for add -> list -> delete -> list, as a user would
+	// Execute operations for add -> list -> delete -> list, as a user would
 	// add hosts to the list
 	if err := addAction(&out, tf, hosts); err != nil {
 		t.Fatalf("Expected no error, got %q\n", err)
@@ -141,7 +141,7 @@ func TestIntegration(t *testing.T) {
 		t.Fatalf("Expected no error, got %q\n", err)
 	}
 
-	// test integration output
+	// Test integration output
 	if out.String() != expectedOut {
 		t.Errorf("Expected output %q, got %q\n", expectedOut, out.String())
 	}
