@@ -70,5 +70,5 @@ func Run(hl *HostsList, ports []int) []Results {
 		res = append(res, r)
 	}
 
-	return r
+	return res
 }
