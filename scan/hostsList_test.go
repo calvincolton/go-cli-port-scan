@@ -21,7 +21,7 @@ func TestAdd(t *testing.T) {
 
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {
-			// initialize list
+			// Initialize list
 			hl := &scan.HostsList{}
 			if err := hl.Add("host1"); err != nil {
 				t.Fatal(err)
@@ -66,7 +66,7 @@ func TestRemove(t *testing.T) {
 
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {
-			// initilize list
+			// Initilize list
 			hl := &scan.HostsList{}
 			for _, h := range []string{"host1", "host2"} {
 				if err := hl.Add(h); err != nil {
@@ -102,7 +102,7 @@ func TestRemove(t *testing.T) {
 }
 
 func TestSaveAndLoad(t *testing.T) {
-	// initialize the lists
+	// Initialize the lists
 	hl1 := scan.HostsList{}
 	hl2 := scan.HostsList{}
 	hostName := "host1"
