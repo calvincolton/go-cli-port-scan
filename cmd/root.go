@@ -24,6 +24,7 @@ package cmd
 import (
 	"fmt"
 	"os"
+	"strings"
 
 	"github.com/spf13/cobra"
 
@@ -86,6 +87,13 @@ func init() {
 
 	rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.go-cli-port-scan.yaml)")
 	rootCmd.PersistentFlags().StringP("hosts-file", "f", "port-scan.hosts", "port-scan hosts file")
+	replacer := strings.NewReplacer("-", "_")
+	viper.SetEnvKeyReplacer(replacer)
+	viper.SetEnvPrefix("PORT_SCAN")
+
+	viper.BindPFlag("hosts-file", rootCmd.PersistentFlags().Lookup("hosts-file"))
+	// might be:
+	// viper.SetEnvPrefix("PSCAN")
 
 	// Cobra also supports local flags, which will only run
 	// when this action is called directly.
@@ -108,7 +116,12 @@ func initConfig() {
 
 		// Search config in home directory with name ".pScan" (without extension).
 		viper.AddConfigPath(home)
-		viper.SetConfigName(".pScan")
+		viper.SetConfigName(".port-scan")
+		// might be
+		// viper.SetConfigName(".go-cli-port-scan")
+		// or might be:
+		// viper.SetConfigName(".pScan")
+
 	}
 
 	viper.AutomaticEnv() // read in environment variables that match
